@@ -3,8 +3,9 @@
 main.displayarea {
   display: grid;
   margin: 0;
-  grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-gap: 1em 1em;
+  justify-content: center;
 }
 
 div.billcard {
@@ -12,9 +13,9 @@ div.billcard {
   flex-flow: column;
   border: 1px solid #c7c7c7;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16);
-  min-height: 10em;
-  max-width: 300px;
+  min-height: 15em;
   justify-content: space-evenly;
+  border-radius: 5px;
 }
 
 div.billcard:hover {
