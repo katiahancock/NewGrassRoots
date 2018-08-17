@@ -60,6 +60,8 @@ function secondFetch(billId) {
     );
 }
 
+
+
 function legislatorFetch(legislatorId) {
   return fetch(`https://openstates.org/api/v1/legislators/${legislatorId}/?apikey=2a939a8d-1448-4810-b036-79139a6a7f33&format=json`)
   .then(response => {
@@ -68,7 +70,7 @@ function legislatorFetch(legislatorId) {
     console.log(result);
     console.log(result.full_name);
     console.log(result.district);
-    return result.full_name;
+    return result;
   });
 }
 
