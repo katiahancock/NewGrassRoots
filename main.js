@@ -6,51 +6,99 @@ function getAllBills() {
   ).then(response => {
     return response.json();
   });
-  // .then(function (allBills) {
-  //   console.log(`Got the bills: ${allBills}`)
-  //   currentSessionBills = allBills;
-  //   return currentSessionBills;
-  // })
-  // .catch(function (error) {
-  //   console.error('Yikes! I should handle this better:\n', error);
-  // });
 }
 
-// Modify displayResults function to create new HTML element for each item in the results array
 
-function displayResults(someResults) {
-  let billMatch = document.getElementById("billDisplay");
+
+function displayResults(results) {
 
   for (let i = 0; i < results.length; i++) {
-    let billLink = document.createElement("li");
-    billLink.className = "listItem";
-    billMatch.appendChild(billLink).textContent = results[i].title;
-  }
 
-  let list = document.getElementsByClassName("listItem");
-  console.log(list);
-  for (var i = 0; i < list.length; i++) {
-    var text = list[i].textContent;
-    list[i].textContent = "";
-    var a = document.createElement("a");
-    a.href = "#";
-    a.textContent = text;
-    list[i].appendChild(a);
+    let x = results[i];
+    
+    const content = `
+    <div class="billcard" data-bill-id=${x.id}>
+      <h1 class="billIdCard">${x.bill_id}</h1>
+      <i class="billTitle">"${x.title}"</i>
+    </div>
+    `;
+    const element = document.createElement("div");
+    element.className = "cardContainer"
+    const allCards = document.getElementById("displayarea");
+    element.innerHTML = content;
+    allCards.appendChild(element);
+    element.addEventListener('click', getBillDetails);
   }
-
-  console.log(results);
 }
 
-document.getElementById("submitButton").addEventListener("click", event => {
+function secondFetch(billId) {
+  fetch(`https://openstates.org/api/v1/bills/${billId}/?apikey=2a939a8d-1448-4810-b036-79139a6a7f33&format=json`)
+    .then(res => res.json())
+    .then(result => {
+      console.log(result);
+      document.getElementById("displayarea").textContent = "";
+      
+      const billContent = `
+    <div className="bill-parent">
+      <h1 className="bill-id-details">${result.bill_id}</h1>
+      <h3 className="bill-title-details">${result.title}</h3>
+      <h4 className="bill-sponsors-details">Sponsors: ${result.sponsors.map(x => `<i>${legislatorFetch(x.leg_id)}</i>`).join(', ')}</h4>
+      <table border=1 width=100%>
+        <tr>
+        <th width=15%>Date</th>
+        <th width=85%>Action</th>
+        </tr>
+        <tr>
+         <td className="bill-actions-date">${result.actions.map(x => `<tr><td>${moment(x.date).format("MMMM Do, YYYY")}</td> <td>${x.action}</td></tr>`).reverse().join('')}</td>
+         </tr>
+      </table>  
+    </div>
+    `;
+      const thisBill = document.getElementById("displayarea");
+      thisBill.innerHTML = billContent;
+    }
+    );
+}
+
+
+
+function legislatorFetch(legislatorId) {
+  return fetch(`https://openstates.org/api/v1/legislators/${legislatorId}/?apikey=2a939a8d-1448-4810-b036-79139a6a7f33&format=json`)
+  .then(response => {
+      return response.json();
+  }).then(result => {
+    console.log(result);
+    console.log(result.full_name);
+    console.log(result.district);
+    return result;
+  });
+}
+
+
+function getBillDetails(event) {
+  let element = event.target;
+  let parent = element.parentElement;
+  console.log(parent.dataset.billId);
+  secondFetch(parent.dataset.billId);
+}
+
+//User search for bills
+function search(event) {
+  console.log({event});
+  event.preventDefault();
   getAllBills().then(currentSessionBills => {
-    document.getElementById("billDisplay").textContent = "";
+    document.getElementById("displayarea").textContent = "";
+    console.log("in search!");
 
     // fuse.js specs
     const options = {
-      threshold: 0.5,
-      minMatchCharLength: 2,
       shouldSort: true,
-      findAllMatches: true,
+      tokenize: true,
+      // distance: 50,
+      threshold: 0.5,
+      // location: 0,
+      // minMatchCharLength: 1,
+      // maxPatternLength: 32,
       keys: ["bill_id", "title"]
     };
 
@@ -59,21 +107,20 @@ document.getElementById("submitButton").addEventListener("click", event => {
 
     let fuse = new Fuse(currentSessionBills, options);
 
-    results = fuse.search(searchTerms);
-
-    console.log("hello");
-    //TODO: modify with regex to account for spaces and obscure characters
-    for (let i = 0; i < results.length; i++) {
-      if (
-        results[i].bill_id.replace(/[\s]/, "") ===
-          searchTerms.replace(/[\W*_*]/gi, "") ||
-        results[i].title.replace(/[\s]/, "") ===
-          searchTerms.replace(/[\W*_*]/gi, "")
-      ) {
-        displayResults(results[i]);
-
-        return searchResults;
-      }
-    }
+    console.log('calling displayResults at ' + new Date(Date.now().toString()));
+    return displayResults(fuse.search(searchTerms));
   });
-});
+};
+
+let input = document.getElementById("billSearch");
+
+//User press Enter key
+input.addEventListener("keyup", function (event) {
+  event.preventDefault();
+  if (event.keyCode === 13) {
+    search();
+  }
+})
+
+
+

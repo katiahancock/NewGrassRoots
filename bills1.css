@@ -1,0 +1,113 @@
+body {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 5% 1.5fr 1fr auto 1fr;
+  grid-gap: 0.3em;
+  /* grid-template-areas: ; */
+}
+
+.session {
+  color: grey;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  text-align: center;
+  background-color: #fffff0;
+}
+
+.bill-id-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-top: 1px solid;
+  border-top-color: #8daf8d;
+}
+
+.bill-id-chamber-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.bill-id {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  margin-bottom: 1px;
+  margin-top: 19px;
+}
+
+.bill-title {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+
+.bill-text-latest {
+  font-size: 11px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 200;
+}
+
+.bill-text-latest:hover {
+  color: black;
+  text-decoration: none;
+}
+
+.chamber {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  margin-top: 0px;
+  margin-bottom: 5px;
+  font-size: 15px;
+}
+
+.sponsor {
+  border-top: 1px solid;
+  border-top-color: #8daf8d;
+  background-color: #fffff0;
+}
+
+.sponsor-name {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+}
+
+.actions {
+  border-top: 1px solid;
+  border-top-color: #8daf8d;
+}
+
+.actions-h2 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+}
+
+.actions-table {
+  border: solid 1px grey;
+  min-width: 40%;
+  max-width: 80%;
+  height: auto;
+}
+
+.original-links-h2 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+}
+
+li {
+  list-style: none;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+}
+
+.original-links-container {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid;
+  border-top-color: #8daf8d;
+  background-color: #fffff0;
+}
+
+ul {
+  text-align: left;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+}

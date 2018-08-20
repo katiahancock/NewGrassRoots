@@ -1,0 +1,17 @@
+.session {
+  color: grey;
+}
+
+.bill-id {
+  font: roboto;
+  font-weight: 700;
+}
+
+.chamber {
+  font-weight: 300;
+}
+
+hr {
+  color: darkolivegreen;
+  height: 1px;
+}
