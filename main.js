@@ -17,14 +17,14 @@ function displayResults(results) {
     let x = results[i];
     
     const content = `
-    <div className="billcard" data-bill-id=${x.id}>
-      <h1 className="card-bill-id">${x.bill_id}</h1>
-      <h3 className="bill-type">${x.title}</h3>
-      <button className="bill-details">Bill Details</button>
+    <div class="billcard" data-bill-id=${x.id}>
+      <h1 class="billIdCard">${x.bill_id}</h1>
+      <i class="billTitle">"${x.title}"</i>
     </div>
     `;
     const element = document.createElement("div");
-    const allCards = document.getElementById("billDisplay");
+    element.className = "cardContainer"
+    const allCards = document.getElementById("displayarea");
     element.innerHTML = content;
     allCards.appendChild(element);
     element.addEventListener('click', getBillDetails);
@@ -36,7 +36,7 @@ function secondFetch(billId) {
     .then(res => res.json())
     .then(result => {
       console.log(result);
-      document.getElementById("billDisplay").textContent = "";
+      document.getElementById("displayarea").textContent = "";
       
       const billContent = `
     <div className="bill-parent">
@@ -54,7 +54,7 @@ function secondFetch(billId) {
       </table>  
     </div>
     `;
-      const thisBill = document.getElementById("billDisplay");
+      const thisBill = document.getElementById("displayarea");
       thisBill.innerHTML = billContent;
     }
     );
@@ -83,9 +83,12 @@ function getBillDetails(event) {
 }
 
 //User search for bills
-function search() {
+function search(event) {
+  console.log({event});
+  event.preventDefault();
   getAllBills().then(currentSessionBills => {
-    document.getElementById("billDisplay").textContent = "";
+    document.getElementById("displayarea").textContent = "";
+    console.log("in search!");
 
     // fuse.js specs
     const options = {
@@ -104,6 +107,7 @@ function search() {
 
     let fuse = new Fuse(currentSessionBills, options);
 
+    console.log('calling displayResults at ' + new Date(Date.now().toString()));
     return displayResults(fuse.search(searchTerms));
   });
 };
