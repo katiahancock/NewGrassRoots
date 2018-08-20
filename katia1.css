@@ -1,0 +1,62 @@
+/* Need to decide which background-color is best */
+body {
+  margin: 0;
+  padding: 0;
+  /* background-color: #8daf8d; */
+  background-color: #d1ded1;
+}
+
+.navbar-brand {
+  margin-left: 5%;
+}
+
+/* .container {
+  padding-right: 10px;
+  padding-left: 10px;
+} */
+
+.btn-outline-success {
+  background-color: #8daf8d;
+  border-color: #708c70;
+  color: white;
+}
+
+.btn-outline-success:hover {
+  border-color: #708c70;
+  background-color: #546954;
+  color: white;
+}
+
+h6 {
+  padding-top: 5px;
+}
+
+form {
+  padding-top: 5px;
+  padding-bottom: 22px;
+  width: 100%;
+}
+
+/* div.jumbotron {
+  position: relative;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: -2;
+} */
+
+/* video#background {
+  position: static;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+} */
+
+/* #its-jumbo-time {
+  color: white;
+  background-image: url(https://newgrassroots.com/wp-content/themes/cosmic_bones/library/images/ngr-home-background.jpg);
+  border-radius: 0;
+} */
