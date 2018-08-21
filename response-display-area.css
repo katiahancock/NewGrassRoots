@@ -1,9 +1,0 @@
-/* this css file relates to response-display-area.html, inspiration via https://www.youtube.com/watch?v=dQHtT47eH0M */
-
-main.displayarea {
-  display: grid;
-  margin: 0;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: 1em 1em;
-  justify-content: center;
-}
