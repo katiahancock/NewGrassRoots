@@ -109,7 +109,6 @@ aka the custom cards Ben made with grid/flexbox, to display the bill-search resp
   justify-content: center;
 }
 
-
 .billcard {
   display: flex;
   flex-direction: column;
@@ -132,6 +131,7 @@ aka the custom cards Ben made with grid/flexbox, to display the bill-search resp
 .billIdCard {
   background-color: #8daf8d;
   padding: 0px;
+  border-radius: 3px;
 }
 
 .cardContainer {
@@ -224,4 +224,26 @@ p.bill-type {
 
 i {
   font-size: 19px;
+}
+
+i.fa-star:before {
+  /* justify-content: right; */
+  color: gold;
+  /* margin-left: 50px; */
+
+  /* align-self: right; */
+  /* align-content: right; */
+  /* align-items: right; */
+  /* text-align: right; */
+}
+
+/* color:white only works when .table background-color is the default(light-green) */
+tr:hover {
+  /* color: white; */
+  color: tomato;
+}
+
+/* if .table background-color is ivory instead of the default(light-green), make sure tr:hover is not white */
+.table {
+  background-color: ivory;
 }

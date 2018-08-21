@@ -8,70 +8,83 @@ function getAllBills() {
   });
 }
 
-
-
 function displayResults(results) {
-
   for (let i = 0; i < results.length; i++) {
-
     let x = results[i];
-    
+
     const content = `
     <div class="billcard" data-bill-id=${x.id}>
-      <h1 class="billIdCard">${x.bill_id}</h1>
+      <h1 class="billIdCard">${x.bill_id}<i class="far fa-star"></i></h1>
       <i class="billTitle">"${x.title}"</i>
       <button id="detailsButton" type="button">Bill Details</button>
     </div>
     `;
     const element = document.createElement("div");
-    element.className = "cardContainer"
+    element.className = "cardContainer";
     const allCards = document.getElementById("displayarea");
     element.innerHTML = content;
     allCards.appendChild(element);
-    element.addEventListener('click', getBillDetails);
+    element.addEventListener("click", getBillDetails);
   }
 }
 
 function secondFetch(billId) {
-  fetch(`https://openstates.org/api/v1/bills/${billId}/?apikey=2a939a8d-1448-4810-b036-79139a6a7f33&format=json`)
+  fetch(
+    `https://openstates.org/api/v1/bills/${billId}/?apikey=2a939a8d-1448-4810-b036-79139a6a7f33&format=json`
+  )
     .then(res => res.json())
     .then(result => {
       console.log(result);
       document.getElementById("displayarea").textContent = "";
-      
+
       const billContent = `
     <div className="bill-parent">
       <h1 className="bill-id-details">${result.bill_id}</h1>
-      <h3 className="bill-title-details">${result.title}</h3>
-      <h4 className="bill-sponsors-details">Sponsors: ${result.sponsors.map(x => legislatorFetch(x.leg_id)).join(', ')}</h4>
-      <table border=1 width=100%>
+      <h3 className="bill-title-details" class="font-italic">${
+        result.title
+      }</h3><br>
+      <h4 className="bill-sponsors-details">Sponsors: ${result.sponsors
+        .map(x => `<i>${legislatorFetch(x.leg_id)}</i>`)
+        .join(", ")}</h4><br>
+      <br>
+      <table class="table table-striped table-hover" width=100%>
         <tr>
-        <th width=15%>Date</th>
-        <th width=85%>Action</th>
+          <th scope="col" width=15%>Date</th>
+          <th scope="col" width=85%>Action</th>
         </tr>
         <tr>
-         <td className="bill-actions-date">${result.actions.map(x => `<tr><td>${moment(x.date).format("MMMM Do, YYYY")}</td> <td>${x.action}</td></tr>`).reverse().join('')}</td>
+         <td className="bill-actions-date">${result.actions
+           .map(
+             x =>
+               `<tr><td>${moment(x.date).format("MMMM Do, YYYY")}</td> <td>${
+                 x.action
+               }</td></tr>`
+           )
+           .reverse()
+           .join("")}</td>
          </tr>
       </table>  
     </div>
     `;
       const thisBill = document.getElementById("displayarea");
       thisBill.innerHTML = billContent;
-    }
-    );
+    });
 }
-
-
 
 function legislatorFetch(legislatorId) {
-  return fetch(`https://openstates.org/api/v1/legislators/${legislatorId}/?apikey=2a939a8d-1448-4810-b036-79139a6a7f33&format=json`)
-  .then(response => {
+  return fetch(
+    `https://openstates.org/api/v1/legislators/${legislatorId}/?apikey=2a939a8d-1448-4810-b036-79139a6a7f33&format=json`
+  )
+    .then(response => {
       return response.json();
-  }).then(result => {
-    return result.full_name;
-  });
+    })
+    .then(result => {
+      console.log(result);
+      console.log(result.full_name);
+      console.log(result.district);
+      return result;
+    });
 }
-
 
 function getBillDetails(event) {
   let element = event.target;
@@ -82,7 +95,7 @@ function getBillDetails(event) {
 
 //User search for bills
 function search(event) {
-  console.log({event});
+  console.log({ event });
   event.preventDefault();
   getAllBills().then(currentSessionBills => {
     document.getElementById("displayarea").textContent = "";
@@ -105,20 +118,17 @@ function search(event) {
 
     let fuse = new Fuse(currentSessionBills, options);
 
-    console.log('calling displayResults at ' + new Date(Date.now().toString()));
+    console.log("calling displayResults at " + new Date(Date.now().toString()));
     return displayResults(fuse.search(searchTerms));
   });
-};
+}
 
 let input = document.getElementById("billSearch");
 
 //User press Enter key
-input.addEventListener("keyup", function (event) {
+input.addEventListener("keyup", function(event) {
   event.preventDefault();
   if (event.keyCode === 13) {
     search(event);
   }
-})
-
-
-
+});
