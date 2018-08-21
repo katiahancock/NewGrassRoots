@@ -126,6 +126,7 @@ aka the custom cards Ben made with grid/flexbox, to display the bill-search resp
   overflow-y: auto;
   padding: 10px;
   align-self: center;
+  justify-content: space-between;
 }
 
 .billIdCard {
@@ -151,7 +152,6 @@ aka the custom cards Ben made with grid/flexbox, to display the bill-search resp
 
 #detailsButton {
   justify-self: flex-end;
-  
 }
 
 button.bill-details {
