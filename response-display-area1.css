@@ -130,12 +130,12 @@ aka the custom cards Ben made with grid/flexbox, to display the bill-search resp
 }
 
 .billIdCard {
-  background-color: rgb(165, 161, 161);
+  background-color: #8daf8d;
   padding: 0px;
 }
 
 .cardContainer {
-
+  justify-self: center;
 }
 
 .billcard:hover {

@@ -20,6 +20,7 @@ function displayResults(results) {
     <div class="billcard" data-bill-id=${x.id}>
       <h1 class="billIdCard">${x.bill_id}</h1>
       <i class="billTitle">"${x.title}"</i>
+      <button type="button">Bill Details</button>
     </div>
     `;
     const element = document.createElement("div");
@@ -118,7 +119,7 @@ let input = document.getElementById("billSearch");
 input.addEventListener("keyup", function (event) {
   event.preventDefault();
   if (event.keyCode === 13) {
-    search();
+    search(event);
   }
 })
 
