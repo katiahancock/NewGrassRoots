@@ -112,7 +112,7 @@ aka the custom cards Ben made with grid/flexbox, to display the bill-search resp
 
 .billcard {
   display: flex;
-  flex-flow: column;
+  flex-direction: column;
   border: 1px solid #c7c7c7;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16);
   min-height: 20em;
@@ -147,6 +147,11 @@ aka the custom cards Ben made with grid/flexbox, to display the bill-search resp
 
 .billTitle {
   align-content: top !important;
+}
+
+#detailsButton {
+  justify-self: flex-end;
+  
 }
 
 button.bill-details {

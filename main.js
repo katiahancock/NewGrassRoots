@@ -20,7 +20,7 @@ function displayResults(results) {
     <div class="billcard" data-bill-id=${x.id}>
       <h1 class="billIdCard">${x.bill_id}</h1>
       <i class="billTitle">"${x.title}"</i>
-      <button type="button">Bill Details</button>
+      <button id="detailsButton" type="button">Bill Details</button>
     </div>
     `;
     const element = document.createElement("div");
@@ -43,7 +43,7 @@ function secondFetch(billId) {
     <div className="bill-parent">
       <h1 className="bill-id-details">${result.bill_id}</h1>
       <h3 className="bill-title-details">${result.title}</h3>
-      <h4 className="bill-sponsors-details">Sponsors: ${result.sponsors.map(x => `<i>${legislatorFetch(x.leg_id)}</i>`).join(', ')}</h4>
+      <h4 className="bill-sponsors-details">Sponsors: ${result.sponsors.map(x => legislatorFetch(x.leg_id)).join(', ')}</h4>
       <table border=1 width=100%>
         <tr>
         <th width=15%>Date</th>
@@ -68,10 +68,7 @@ function legislatorFetch(legislatorId) {
   .then(response => {
       return response.json();
   }).then(result => {
-    console.log(result);
-    console.log(result.full_name);
-    console.log(result.district);
-    return result;
+    return result.full_name;
   });
 }
 
