@@ -65,9 +65,15 @@ function secondFetch(billId) {
       <h3 className="bill-title-details" class="font-italic">${
         result.title
       }</h3><br>
-      <h4 className="bill-sponsors-details">Sponsors: <a href='https://openstates.org/vt/legislators/${result.sponsors.map(
-        x => x.leg_id
-      )}/'>${result.sponsors.map(x => x.name).join(", ")}</a></h4><br>
+      <h4 className="bill-sponsors-details">Sponsors: ${result.sponsors
+        .map(
+          x =>
+            `<a href="https://openstates.org/vt/legislators/${x.leg_id}/">${
+              x.name
+            }</a>`
+        )
+        .join(", ")}
+      </h4><br>
       <br>
       <table class="table table-striped table-hover" width=100%>
         <tr>
