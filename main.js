@@ -47,7 +47,7 @@ function toggleFavoriteStar(event) {
   }
 
   // alert(style);
-  // alert("This bill has been added to your feed");
+  alert("Add this bill to my feed");
 }
 
 function secondFetch(billId) {
@@ -63,8 +63,11 @@ function secondFetch(billId) {
     <div className="bill-parent">
       <h1 className="bill-id-details">${result.bill_id}</h1>
       <h3 className="bill-title-details" class="font-italic">${
-        result.title}</h3><br>
-      <h4 className="bill-sponsors-details">Sponsors: <a href='https://openstates.org/vt/legislators/${result.sponsors.map(x => x.leg_id)}/'>${result.sponsors.map(x => x.name).join(", ")}</a></h4><br>
+        result.title
+      }</h3><br>
+      <h4 className="bill-sponsors-details">Sponsors: <a href='https://openstates.org/vt/legislators/${result.sponsors.map(
+        x => x.leg_id
+      )}/'>${result.sponsors.map(x => x.name).join(", ")}</a></h4><br>
       <br>
       <table class="table table-striped table-hover" width=100%>
         <tr>
@@ -89,7 +92,6 @@ function secondFetch(billId) {
       thisBill.innerHTML = billContent;
     });
 }
-
 
 function getBillDetails(event) {
   let element = event.target;
