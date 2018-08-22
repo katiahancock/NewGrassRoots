@@ -154,6 +154,10 @@ aka the custom cards Ben made with grid/flexbox, to display the bill-search resp
   justify-self: flex-end;
 }
 
+#detailsButton:hover {
+  background-color: ivory;
+}
+
 button.bill-details {
   background: #205820;
   border: 1px solid #5ba75b;
@@ -226,15 +230,16 @@ i {
   font-size: 19px;
 }
 
-i.fa-star:before {
+i.fa-star {
   /* justify-content: right; */
   color: gold;
-  /* margin-left: 50px; */
+  position: relative;
+  left: 20px;
+  bottom: 9px;
+}
 
-  /* align-self: right; */
-  /* align-content: right; */
-  /* align-items: right; */
-  /* text-align: right; */
+i.fa-star:hover {
+  color: grey;
 }
 
 /* color:white only works when .table background-color is the default(light-green) */

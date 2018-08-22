@@ -12,12 +12,16 @@ function displayResults(results) {
   for (let i = 0; i < results.length; i++) {
     let x = results[i];
 
+    let billGUID = `bill-${x.id}`;
+
     const content = `
-    <div class="billcard" data-bill-id=${x.id}>
-      <h1 class="billIdCard">${x.bill_id}<i class="far fa-star"></i></h1>
+    <div class="billcard" data-bill-id=${x.id}>  
+    <h1 class="billIdCard">${
+      x.bill_id
+    }<i class="far fa-star" id="${billGUID}"></i></h1>
       <i class="billTitle">"${x.title}"</i>
       <button id="detailsButton" type="button">Bill Details</button>
-    </div>
+      </div>
     `;
     const element = document.createElement("div");
     element.className = "cardContainer";
@@ -25,7 +29,25 @@ function displayResults(results) {
     element.innerHTML = content;
     allCards.appendChild(element);
     element.addEventListener("click", getBillDetails);
+
+    let toggleStar = document.getElementById(billGUID);
+    toggleStar.addEventListener("click", toggleFavoriteStar);
   }
+}
+
+function toggleFavoriteStar(event) {
+  let element = event.target;
+
+  if (element.classList.contains("fas")) {
+    element.classList.remove("fas");
+    element.classList.add("far");
+  } else {
+    element.classList.remove("far");
+    element.classList.add("fas");
+  }
+
+  // alert(style);
+  // alert("This bill has been added to your feed");
 }
 
 function secondFetch(billId) {
