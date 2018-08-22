@@ -18,7 +18,7 @@ function displayResults(results) {
     <div class="billcard" data-bill-id=${x.id}>  
     <h1 class="billIdCard">${
       x.bill_id
-    }<i class="far fa-star" id="${billGUID}"></i></h1>
+      }<i class="far fa-star" id="${billGUID}"></i></h1>
       <i class="billTitle">"${x.title}"</i>
       <button id="detailsButton" type="button">Bill Details</button>
       </div>
@@ -73,14 +73,14 @@ function secondFetch(billId) {
         </tr>
         <tr>
          <td className="bill-actions-date">${result.actions
-           .map(
-             x =>
-               `<tr><td>${moment(x.date).format("MMMM Do, YYYY")}</td> <td>${
-                 x.action
-               }</td></tr>`
-           )
-           .reverse()
-           .join("")}</td>
+          .map(
+            x =>
+              `<tr><td>${moment(x.date).format("MMMM Do, YYYY")}</td> <td>${
+              x.action
+              }</td></tr>`
+          )
+          .reverse()
+          .join("")}</td>
          </tr>
       </table>  
     </div>
@@ -94,8 +94,10 @@ function secondFetch(billId) {
 function getBillDetails(event) {
   let element = event.target;
   let parent = element.parentElement;
-  console.log(parent.dataset.billId);
-  secondFetch(parent.dataset.billId);
+  console.log('Bill ID: ' + JSON.stringify(parent.dataset));
+  if (parent.dataset.billId) {
+    window.location.search = `?bill_id=${parent.dataset.billId}`
+  }
 }
 
 //User search for bills
@@ -123,17 +125,33 @@ function search(event) {
 
     let fuse = new Fuse(currentSessionBills, options);
 
-    console.log("calling displayResults at " + new Date(Date.now().toString()));
     return displayResults(fuse.search(searchTerms));
   });
 }
 
+const handleVisitingBill = () => {
+  const urlParams = window.location.search;
+  const path = window.location.pathname;
+  const params = new URLSearchParams(urlParams);
+
+  if (path.startsWith('/home') && params.get('bill_id')) {
+    console.log({ params })
+    console.log('doing the bill fetch')
+    secondFetch(params.get('bill_id'));
+  }
+};
+
 let input = document.getElementById("billSearch");
 
 //User press Enter key
-input.addEventListener("keyup", function(event) {
+input.addEventListener("keyup", function (event) {
   event.preventDefault();
   if (event.keyCode === 13) {
     search(event);
   }
 });
+const main = () => {
+
+  handleVisitingBill();
+}
+main();
