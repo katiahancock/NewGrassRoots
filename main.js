@@ -145,7 +145,7 @@ const handleVisitingBill = () => {
   const path = window.location.pathname;
   const params = new URLSearchParams(urlParams);
 
-  if (path.startsWith('/home') && params.get('bill_id')) {
+  if (path.includes('/home') && params.get('bill_id')) {
     console.log({ params })
     console.log('doing the bill fetch')
     secondFetch(params.get('bill_id'));
