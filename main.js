@@ -69,14 +69,20 @@ function secondFetch(billId) {
       <h3 className="bill-title-details" class="font-italic">${
         result.title
       }</h3><br>
-      <h4 className="bill-sponsors-details">Sponsors: ${result.sponsors
-        .map(
-          x =>
-            `<a href="https://openstates.org/vt/legislators/${x.leg_id}/">${
-              x.name
-            }</a>`
-        )
-        .join(", ")}
+      <h4 className="bill-sponsors-details">Sponsors: 
+        ${result.sponsors
+          .map(x => {
+            if (x.leg_id) {
+              return `<a href="https://openstates.org/vt/legislators/${
+                x.leg_id
+              }/">${x.name}</a>`;
+            } else {
+              return `<a href="https://openstates.org/vt/committees/${
+                x.committee_id
+              }/">${x.name}</a>`;
+            }
+          })
+          .join(", ")}
       </h4><br>
       <br>
       <table class="table table-striped table-hover" width=100%>
@@ -106,8 +112,10 @@ function secondFetch(billId) {
 function getBillDetails(event) {
   let element = event.target;
   let parent = element.parentElement;
-  console.log(parent.dataset.billId);
-  secondFetch(parent.dataset.billId);
+  console.log("Bill ID: " + JSON.stringify(parent.dataset));
+  if (parent.dataset.billId) {
+    window.location.search = `?bill_id=${parent.dataset.billId}`;
+  }
 }
 
 //User search for bills
@@ -135,10 +143,21 @@ function search(event) {
 
     let fuse = new Fuse(currentSessionBills, options);
 
-    console.log("calling displayResults at " + new Date(Date.now().toString()));
     return displayResults(fuse.search(searchTerms));
   });
 }
+
+const handleVisitingBill = () => {
+  const urlParams = window.location.search;
+  const path = window.location.pathname;
+  const params = new URLSearchParams(urlParams);
+
+  if (path.includes("/home") && params.get("bill_id")) {
+    console.log({ params });
+    console.log("doing the bill fetch");
+    secondFetch(params.get("bill_id"));
+  }
+};
 
 let input = document.getElementById("billSearch");
 
@@ -149,3 +168,7 @@ input.addEventListener("keyup", function(event) {
     search(event);
   }
 });
+const main = () => {
+  handleVisitingBill();
+};
+main();
