@@ -69,21 +69,22 @@ function secondFetch(billId) {
       <h3 className="bill-title-details" class="font-italic">${
         result.title
       }</h3><br>
-      <h4 className="bill-sponsors-details">Sponsors: 
+      <h4 className="bill-sponsors-details">Sponsor(s): 
         ${result.sponsors
           .map(x => {
             if (x.leg_id) {
-              return `<a href="https://openstates.org/vt/legislators/${
+              return `<a id="sponsor-link" href="https://openstates.org/vt/legislators/${
                 x.leg_id
               }/">${x.name}</a>`;
             } else {
-              return `<a href="https://openstates.org/vt/committees/${
+              return `<a id="sponsor-link" href="https://openstates.org/vt/committees/${
                 x.committee_id
               }/">${x.name}</a>`;
             }
           })
           .join(", ")}
       </h4><br>
+      <a class="call-now-details" href="https://newgrassroots.com/account/login/">send voice message now</a><br>
       <br>
       <table class="table table-striped table-hover" width=100%>
         <tr>
