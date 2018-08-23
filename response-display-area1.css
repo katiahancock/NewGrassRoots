@@ -26,9 +26,9 @@ button.btn.btn-outline-success:hover {
 }
 
 .login {
-  font-family: "Roboto", sans-serif;
+  /* font-family: "Roboto", sans-serif; */
   font-weight: 500;
-  margin-left: 100px;
+  margin-left: 35px;
   /* border: 0.5px solid #205820; */
   border-radius: 4px;
   padding-left: 2px;

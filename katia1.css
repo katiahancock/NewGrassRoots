@@ -43,6 +43,11 @@ ul {
   border-color: goldenrod;
 }
 
+#its-subscribe-time:hover {
+  background-color: #205820;
+  border-color: #205820;
+}
+
 .btn-outline-success:hover {
   border-color: #708c70;
   background-color: #546954;
