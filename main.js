@@ -19,8 +19,10 @@ function displayResults(results) {
     <h1 class="billIdCard">${
       x.bill_id
     }<i class="far fa-star" id="${billGUID}"></i></h1>
-      <i class="billTitle">"${x.title}"</i>
-      <button id="detailsButton" type="button">Bill Details</button>
+      <i class="billTitle">"${
+        x.title
+      }"</i><div class="billcard-links-container"><a class="call-now" href="https://newgrassroots.com/account/login/">send voice message now</a><br>
+      <button id="detailsButton" type="button">Bill Details</button></div>
       </div>
     `;
     const element = document.createElement("div");
@@ -34,6 +36,8 @@ function displayResults(results) {
     toggleStar.addEventListener("click", toggleFavoriteStar);
   }
 }
+
+/*   */
 
 function toggleFavoriteStar(event) {
   let element = event.target;

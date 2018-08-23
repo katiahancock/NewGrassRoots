@@ -16,9 +16,8 @@ h2.text-dark {
 button.btn.btn-outline-success {
   /* background-color: #af8d9e; */
   background-color: goldenrod;
-  color: white;
+  /* color: white; */
   border: none;
-  border-color: #af8d9e;
 }
 
 button.btn.btn-outline-success:hover {
@@ -156,6 +155,25 @@ aka the custom cards Ben made with grid/flexbox, to display the bill-search resp
 
 #detailsButton:hover {
   background-color: ivory;
+}
+
+div.billcard-links-container {
+  /* border: 1px solid black; */
+  display: flex;
+  flex-direction: column;
+}
+
+.call-now {
+  color: goldenrod;
+  font-size: 0.9rem;
+  position: relative;
+  top: 15px;
+  text-decoration-line: underline;
+}
+
+a.call-now:hover {
+  color: #205820;
+  text-decoration: none;
 }
 
 button.bill-details {
