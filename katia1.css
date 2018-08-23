@@ -21,6 +21,28 @@ body {
   color: white;
 }
 
+#its-footer-time {
+  background-color: #8daf8d;
+  color: white;
+}
+
+ul {
+  list-style: none;
+}
+
+#its-learn-time a {
+  color: white;
+}
+
+#its-mailing-list-time {
+  max-width: 200px;
+}
+
+#its-subscribe-time {
+  background-color: goldenrod;
+  border-color: goldenrod;
+}
+
 .btn-outline-success:hover {
   border-color: #708c70;
   background-color: #546954;

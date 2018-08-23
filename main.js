@@ -2,7 +2,7 @@ let searchResults;
 
 function getAllBills() {
   return fetch(
-    "https://openstates.org/api/v1/bills/?state=vt&apikey=2a939a8d-1448-4810-b036-79139a6a7f33&format=json&search_window=session"
+    "https://openstates.org/api/v1/bills/?state=vt&apikey=2a939a8d-1448-4810-b036-79139a6a7f33&format=json&search_window=term:2017-2018"
   ).then(response => {
     return response.json();
   });
@@ -21,8 +21,8 @@ function displayResults(results) {
     }<i class="far fa-star" id="${billGUID}"></i></h1>
       <i class="billTitle">"${
         x.title
-      }"</i><div class="billcard-links-container"><a class="call-now" href="https://newgrassroots.com/account/login/">send voice message now</a><br>
-      <button id="detailsButton" type="button">Bill Details</button></div>
+      }"</i><a class="call-now" href="https://newgrassroots.com/account/login/">send voice message now</a><br>
+      <button id="detailsButton" type="button" onclick="getBillDetails">Bill Details</button>
       </div>
     `;
     const element = document.createElement("div");
@@ -152,7 +152,7 @@ const handleVisitingBill = () => {
   const path = window.location.pathname;
   const params = new URLSearchParams(urlParams);
 
-  if (path.includes("/home") && params.get("bill_id")) {
+  if (params.get("bill_id")) {
     console.log({ params });
     console.log("doing the bill fetch");
     secondFetch(params.get("bill_id"));
