@@ -166,8 +166,6 @@ div.billcard-links-container {
 .call-now {
   color: goldenrod;
   font-size: 0.9rem;
-  position: relative;
-  top: 15px;
   text-decoration-line: underline;
 }
 

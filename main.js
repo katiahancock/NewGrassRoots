@@ -22,7 +22,7 @@ function displayResults(results) {
       <i class="billTitle">"${
         x.title
       }"</i><a class="call-now" href="https://newgrassroots.com/account/login/">send voice message now</a><br>
-      <button id="detailsButton" type="button" onclick="getBillDetails">Bill Details</button>
+      <button id="detailsButton" type="button">Bill Details</button>
       </div>
     `;
     const element = document.createElement("div");
@@ -131,7 +131,7 @@ function search(event) {
       shouldSort: true,
       tokenize: true,
       // distance: 50,
-      threshold: 0.5,
+      threshold: 0.4,
       // location: 0,
       // minMatchCharLength: 1,
       // maxPatternLength: 32,
