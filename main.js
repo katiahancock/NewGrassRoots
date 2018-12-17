@@ -2,7 +2,7 @@ let searchResults;
 
 function getAllBills() {
   return fetch(
-    "https://openstates.org/api/v1/bills/?state=vt&apikey=2a939a8d-1448-4810-b036-79139a6a7f33&format=json&search_window=term:2017-2018"
+    "https://openstates.org/api/v1/bills/?state=vt&apikey=2a939a8d-1448-4810-b036-79139a6a7f33&format=json&search_window=session"
   ).then(response => {
     return response.json();
   });
