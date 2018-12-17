@@ -51,7 +51,7 @@ button.btn.btn-outline-success:hover {
 
 .jumbotron {
   padding: 1.5rem;
-  background: url(https://newgrassroots.com/wp-content/uploads/2018/12/ngr-home-background-goldenrod-hue-lightness-50.jpg);
+  background: url("https://newgrassroots.com/wp-content/uploads/2018/12/ngr-home-background-goldenrod-hue-lightness-50.jpg");
 }
 
 .display-4 {
